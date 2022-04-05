@@ -1,0 +1,72 @@
+<div class="Shopping-cart-area pt-60 pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="li-product-remove">Gỡ</th>
+                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                    <th class="cart-product-name">Sản phẩm</th>
+                                    <th class="li-product-price">Đơn giá</th>
+                                    <th class="li-product-quantity">Số Lượng</th>
+                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                </tr>
+                            </thead>
+                            <ng-container *ngIf="cart.length == 0 ;else cart_null">
+                                <tr>
+                                    <td colspan="6" class="text-center">Danh sách rỗng</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #cart_null>
+                                <tbody *ngIf="product">
+                                    <tr *ngFor="let p of product | keyvalue">
+                                        <td class="li-product-remove"><a (click)="remove(p.key.productId)" style="cursor: pointer; font-weight: bold;">X</a></td>
+                                        <td class="li-product-thumbnail">
+                                            <a href="Product/{{ p.key.productId }}"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ p.key.images }}" alt="{{ p.key.productName }}"></a>
+                                        </td>
+                                        <td class="li-product-name"><a href="Product/{{ p.key.productId }}">{{ p.key.productName }}</a></td>
+                                        <td class="li-product-price"><span class="amount">{{ p.key.price | currency: 'VND': '': '1.0-1' }}</span></td>
+                                        <td class="quantity">
+                                            <label>Quantity</label>
+                                            <div class="cart-plus-minus">
+                                                <input class="cart-plus-minus-box" value="{{ p.value.amount }}" type="text" readonly>
+                                                <div class="dec qtybutton" (click)="decrease(p.key)"><i class="fa fa-angle-down"></i></div>
+                                                <div class="inc qtybutton" (click)="increase(p.key)"><i class="fa fa-angle-up"></i></div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal"><span class="amount">{{ p.value.total | currency: 'VND': '': '1.0-1' }}</span> <span>đ</span></td>
+                                    </tr>
+                                </tbody>
+                            </ng-template>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="coupon-all">
+                                <div class="coupon2">
+                                    <button (click)="updateCartAmount()" class="button">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Tổng tiền giỏ hàng</h2>
+                                <ul>
+                                    <li>Tổng giá <span *ngIf="product">{{ total | currency: 'VND': '': '1.0-1' }}</span></li>
+                                </ul>
+                                <a href="/checkout" routerLink="/checkout" routerLinkActive="active">Thanh toán</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

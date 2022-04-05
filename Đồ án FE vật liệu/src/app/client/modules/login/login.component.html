@@ -1,0 +1,202 @@
+<div class="page-section mb-60" style="margin-top: 50px; margin-bottom: 50px">
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+            <!-- Login Form s-->
+            <form  [formGroup]="loginForm" (ngSubmit)="loginOnSubmit(loginForm.value)">
+               <div class="login-form">
+                  <h4 class="login-title">Đăng nhập</h4>
+                  <div class="row">
+                     <div *ngIf="loginError" class="col-md-12 col-12 mb-20 alert alert-warning">
+                        <h4>Lỗi: {{ loginError }}</h4>
+                     </div>
+                     <div class="col-md-12 col-12 mb-20">
+                        <label for="email">Email*</label>
+                        <input 
+                           formControlName="email"
+                           class="mb-0 form-control" 
+                           type="email" 
+                           placeholder="Email..."
+                           [ngClass]="{'is-invalid': loginForm.get('email').touched && loginForm.get('email').invalid }"
+                        >
+                        <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid" class="invalid-feedback">
+                           <div *ngIf="loginForm.get('email').errors.required"> Email bị bỏ trống</div>
+                           <div *ngIf="loginForm.get('email').errors.pattern">Email không phù hợp xin hãy nhập lại</div>
+                        </div>
+                     </div>
+                     <div class="col-12 mb-20">
+                        <label for="password">Mật khẩu</label>
+                        <input
+                           formControlName="password" 
+                           class="mb-0 form-control" 
+                           type="password" 
+                           placeholder="Mật khẩu..."
+                           [ngClass]="{'is-invalid': loginForm.get('password').touched && loginForm.get('password').invalid }"
+                        >
+                        <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid" class="invalid-feedback">
+                           <div *ngIf="loginForm.get('password').errors.required"> Mật khẩu bị bỏ trống </div>
+                           <div *ngIf="loginForm.get('password').errors.minlength"> Mật khẩu tối thiểu là 8  kí tự </div>
+                        </div>
+                     </div>
+                     <div class="col-md-8">
+                        <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                           
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                        <button style="cursor: pointer;" class="register-button mt-0" type="submit" [disabled]="!loginForm.valid">Đăng nhập</button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+            <form [formGroup]="signupForm" (ngSubmit)="signupOnSubmit(signupForm.value)">
+               <div class="login-form">
+                  <h4 class="login-title">Đăng Kí</h4>
+                  <div class="row">
+                     <div *ngIf="signupError" class="col-md-12 col-12 mb-20 alert alert-warning">
+                        <h4>Lỗi: {{ signupError }}</h4>
+                     </div>
+                     <div class="col-md-6 col-12 mb-20">
+                        <label for="firstname">Họ và tên lót</label>
+                        <input 
+                           formControlName="firstname" 
+                           class="mb-0 form-control" 
+                           type="text" 
+                           placeholder="Họ và tên lót..."
+                           [ngClass]="{'is-invalid': signupForm.get('firstname').touched && signupForm.get('firstname').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('firstname').touched && signupForm.get('firstname').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('firstname').errors.required"> Họ và tên lót bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('firstname').errors.minlength"> Tối thiểu 7 kí tự </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-6 col-12 mb-20">
+                        <label for="lastname">Tên</label>
+                        <input 
+                           formControlName="lastname" 
+                           class="mb-0 form-control" 
+                           type="text" 
+                           placeholder="Tên..."
+                           [ngClass]="{'is-invalid': signupForm.get('lastname').touched && signupForm.get('lastname').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('lastname').touched && signupForm.get('lastname').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('lastname').errors.required"> Tên bị bỏ trống </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12 mb-20">
+                        <label for="email">Email</label>
+                        <input 
+                           formControlName="email" 
+                           class="mb-0 form-control" 
+                           type="text" 
+                           placeholder="Email..."
+                           [ngClass]="{'is-invalid': signupForm.get('email').touched && signupForm.get('email').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('email').errors.required"> Email bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('email').errors.pattern"> Email không phù hợp </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-6 mb-20">
+                        <label for="signup_password">Mật khẩu</label>
+                        <input
+                           #password 
+                           formControlName="signup_password" 
+                           class="mb-0 form-control" 
+                           type="password" 
+                           placeholder="Mật khẩu..."
+                           [ngClass]="{'is-invalid': signupForm.get('signup_password').touched && signupForm.get('signup_password').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('signup_password').touched && signupForm.get('signup_password').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('signup_password').errors.required"> Mật khẩu bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('signup_password').errors.minlength"> Tối thiểu 8 kí tự </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-6 mb-20">
+                        <label for="confimation">Xác nhận mật khẩu</label>
+                        <input 
+                           #confirm_password 
+                           formControlName="confirmation" 
+                           class="mb-0 form-control" 
+                           type="password" 
+                           placeholder="Xác nhận mật khẩu..."
+                           [ngClass]="{'is-invalid': signupForm.get('confirmation').touched && signupForm.get('confirmation').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('confirmation').touched && signupForm.get('confirmation').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('confirmation').errors.required"> Xác nhận mật khẩu bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('confirmation').errors.minlength"> Tối thiểu 10 kí tự </div>
+                           <div *ngIf="signupForm.get('confirmation').errors.mustMatch"> Hai mật khẩu không giống nhau </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12 mb-20">
+                        <label for="address">Địa chỉ</label>
+                        <input 
+                           formControlName="address" 
+                           class="mb-0 form-control" 
+                           type="text" 
+                           placeholder="Địa chỉ..."
+                           [ngClass]="{'is-invalid': signupForm.get('address').touched && signupForm.get('address').invalid }"  
+                        >
+                        <div *ngIf="signupForm.get('address').touched && signupForm.get('address').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('address').errors.required"> Địa chỉ bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('address').errors.minlength"> Tối thiểu 15 kí tự </div>
+                        </div>
+                     </div>
+
+                     <div class="col-md-12 mb-20">
+                        <label for="phonenumber">Số điện thoại</label>
+                        <input 
+                           formControlName="phonenumber" 
+                           class="mb-0 form-control" 
+                           type="tel" 
+                           placeholder="Số điện thoại..."
+                           [ngClass]="{ 'is-invalid': signupForm.get('phonenumber').touched && signupForm.get('phonenumber').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('phonenumber').touched && signupForm.get('phonenumber').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('phonenumber').errors.required"> Số điện thoại bị bỏ trống </div>
+                           <div *ngIf="signupForm.get('phonenumber').errors.pattern"> Số điện thoại không hợp lệ </div>
+                        </div>
+                        
+                     </div>
+
+                     <div class="col-md-12 mb-20">
+                        <div class="row">
+                           <div class="col-sm-12 col-md-12 col-lg-3 col-xs-12">
+                              <label for="gender">Giới tính Nam</label>
+                              <input name="gender" style="width: 20px" formControlname="gender" type="radio" value="true">
+                           </div>
+                           <div class="col-sm-12 col-md-12 col-lg-3 col-xs-12 ">
+                              <label for="gender">Giới tính Nữ</label>
+                              <input name="gender" style="width: 20px" formControlName="gender" type="radio" value="false">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12 mb-20">
+                        <label for="birthday">Ngày sinh</label>
+                        <input 
+                           formControlName="birthday" 
+                           class="mb-0 form-control"
+                           type="date"
+                           [ngClass]="{ 'is-invalid': signupForm.get('birthday').touched && signupForm.get('birthday').invalid }"
+                        >
+                        <div *ngIf="signupForm.get('birthday').touched && signupForm.get('birthday').invalid" class="invalid-feedback">
+                           <div *ngIf="signupForm.get('birthday').errors.required"> Ngày sinh bị bỏ trống </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12" style="margin-top: 35px;">
+                        <button style="cursor: pointer;" class="register-button mt-0" type="submit" [disabled]="!signupForm.valid">Đăng kí</button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

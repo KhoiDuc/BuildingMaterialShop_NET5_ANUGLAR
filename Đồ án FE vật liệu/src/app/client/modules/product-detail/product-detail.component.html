@@ -1,0 +1,52 @@
+<div class="content-wraper">
+    <div class="container">
+        <div class="row single-product-area" style="margin-top: 60px; margin-bottom: 60px;">
+            <div class="col-lg-5 col-md-6">
+               <!-- Product Details Left -->
+                <div class="product-details-left">
+                    <div class="product-details-images slider-navigation-1">
+                        <div class="lg-image">   
+                            <img height="300" width="300" src="https://drive.google.com/uc?export=view&id={{ product.images }}" alt="product image">
+                        </div>
+                    </div>
+                </div>
+                <!--// Product Details Left -->
+            </div>
+
+            <div class="col-lg-7 col-md-6">
+                <div class="product-details-view-content pt-60">
+                    <div class="product-info">
+                        <h2>{{ product.productName }}</h2>
+                        <p class="product-details-ref">Mã Loại: {{ product.categoryId }}</p>
+                        <p class="product-details-ref">Đơn vị tính: {{ product.unit }}</p>
+                        <p class="product-details-ref">Số lượng còn lại: {{ product.wareHouses[product.wareHouses.length - 1].quantity }}</p>
+                        <div class="price-box pt-20">
+                            <span class="new-price new-price-2">{{ product.price | currency: 'VND': '': '1.0-1' }}</span>
+                            <span>đ</span>
+                        </div>
+                        <div class="product-desc">
+                            <p>
+                                <span>
+                                    {{ product.descriptions }}
+                                </span>
+                            </p>
+                        </div>
+                        <div class="single-add-to-cart">
+                            <form action="#" class="cart-quantity">
+                                <div class="quantity">
+                                    <label>Số lượng</label>
+                                    <div class="cart-plus-minus">
+                                        <input #inputAmount class="cart-plus-minus-box" value="{{ amount }}" type="text" readonly>
+                                        <div class="dec qtybutton"><i (click)="decrease()" class="fa fa-angle-down"></i></div>
+                                        <div class="inc qtybutton"><i (click)="increase()" class="fa fa-angle-up"></i></div>
+                                    </div>
+                                </div>
+                                <button (click)="AddToCart(product.productName, product.productId, inputAmount.value, product.price)" class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

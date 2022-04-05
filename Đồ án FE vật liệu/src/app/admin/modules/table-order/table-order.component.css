@@ -1,0 +1,39 @@
+table .error-row td {
+    background-color: #f93e3e;
+    color: white;
+}
+
+table .finish-row td {
+    background-color: #49cc90;
+    color: white;
+}
+
+table .success-row td {
+    background-color: #fca130;
+    color: white;
+}
+
+.box {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    clear: both;
+}
+
+.box1 {
+    background-color: #f93e3e;
+}
+
+.box2 {
+    background-color: #ddd;
+}
+
+.box3 {
+    background-color: #fca130;
+}
+
+.box4 {
+    background-color: #49cc90;
+}

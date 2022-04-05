@@ -1,0 +1,87 @@
+<div class="header-top-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-12 col-xs-4">
+                <div class="logo-area">
+                    <a href="#"><img src="../../../../assets/admin/img/logo/logo.png " alt="" /></a>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                <div class="header-top-menu">
+                    <ul class="nav navbar-nav notika-top-nav">
+                        <li class="nav-item">
+                            <a routerLink="/admin/Profile" routerLinkActive="active" href="/admin/Profile">Nhân viên: {{ fullname }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a (click)="logout()" style="cursor: pointer; color:white">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mobile-menu-area" style="margin-bottom: 40px;">
+    <div class="container mean-container">
+        <div class="mean-bar">
+            <a (click)="mobileMenuNavTrigger()" *ngIf="!mmnTrigger" class="meanmenu-reveal" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            <a (click)="mobileMenuNavTrigger()" *ngIf="mmnTrigger" class="meanmenu-reveal meanclose" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;">
+                X
+            </a>
+            <nav class="mean-nav">
+                <ul class="mobile-menu-nav" [ngStyle]="{ 'display': ulDisplay == false ? 'none' : 'block' }">
+                    <li *ngIf="role"><a (click)="expand('Chart')">Thống kê</a>
+                        <ul class="collapse dropdown-header-top" [ngStyle]="{ 'display': componentDisplay == 'Chart' ? 'block' : 'none' }">
+                            <li><a routerLink="/admin/" routerLinkActive="active" href="admin/">Thống kê doanh thu sản phẩm</a></li>
+                        </ul>
+                        <a (click)="expand('Chart')" *ngIf="componentDisplay != 'Chart' " class="mean-expand" style="font-size: 18px">+</a>
+                        <a (click)="expand('')" *ngIf="componentDisplay == 'Chart' " class="mean-expand mean-clicked" style="font-size: 18px">-</a>
+                    </li>
+                    <li><a (click)="expand('Tables')">Dữ liệu dạng bảng</a>
+                        <ul class="collapse dropdown-header-top" [ngStyle]="{ 'display': componentDisplay == 'Tables' ? 'block' : 'none' }">
+                            <li *ngIf="role"><a href="admin/tableEmployee" routerLink="/admin/tableEmployee" routerLinkActive="active">Nhân viên</a></li>
+                            <li *ngIf="role"><a href="admin/tableCustomer" routerLink="/admin/tableEmployee" routerLinkActive="active">Khách hàng</a></li>
+                            <li *ngIf="role"><a href="admin/tableProduct" routerLink="/admin/tableEmployee" routerLinkActive="active">Sản phẩm</a></li>
+                            <li *ngIf="roleEmployee || role"><a href="admin/tableOrder" routerLink="/admin/tableEmployee" routerLinkActive="active">Đơn hàng</a></li>
+                        </ul>
+                        <a (click)="expand('Tables')" *ngIf="componentDisplay != 'Tables' " class="mean-expand" style="font-size: 18px">+</a>
+                        <a (click)="expand('')" *ngIf="componentDisplay == 'Tables' " class="mean-expand mean-clicked" style="font-size: 18px">-</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="main-menu-area mg-tb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                    <li *ngIf="role" [class.active]="currentTab == 'Charts'"><a (click)="changeTab('Charts')" style="cursor: pointer;"><i class="notika-icon notika-bar-chart"></i>Thống kê</a></li>
+                    <li [class.active]="currentTab == 'Tables'"><a (click)="changeTab('Tables')" style="cursor: pointer;"><i class="notika-icon notika-windows"></i> Dữ liệu dạng bảng</a></li>
+                </ul>
+                <div class="tab-content custom-menu-content">
+                    <div *ngIf="role" [class.active]="currentTab == 'Charts'" class="tab-pane fade in notika-tab-menu-bg animated flipInX" id="Charts">
+                        <ul class="notika-main-menu-dropdown">
+                            <li><a routerLink="/admin/" routerLinkActive="active" href="admin/">Thống kê sản phẩm</a></li>
+                        </ul>
+                    </div>
+                    <div [class.active]="currentTab == 'Tables'" class="tab-pane fade in notika-tab-menu-bg animated flipInX" id="Tables">
+                        <ul class="notika-main-menu-dropdown">
+                            <li *ngIf="role"><a href="admin/tableEmployee" routerLink="/admin/tableEmployee" routerLinkActive="active">Nhân viên</a></li>
+                            <li *ngIf="role"><a href="admin/tableCustomer" routerLink="/admin/tableCustomer" routerLinkActive="active">Khách hàng</a></li>
+                            <li *ngIf="role"><a href="admin/tableProduct" routerLink="/admin/tableProduct" routerLinkActive="active">Sản phẩm</a></li>
+                            <li *ngIf="role || roleEmployee"><a href="admin/tableOrder" routerLink="/admin/tableOrder" routerLinkActive="active">Đơn hàng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="page-section mb-60" style="margin-top: 50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
+                <!-- Login Form s-->
+                <form [formGroup]="changePasswordForm" >
+                    <div class="login-form">
+                        <h4 class="login-title">Đổi Mật Khẩu</h4>
+                        <div class="row">
+                            <div *ngIf="changePasswordError" class="col-md-12 col-12 mb-20 alert alert-warning">
+                                <h4>Lỗi: {{ changePasswordError }}</h4>
+                             </div>
+                            <div class="col-12 mb-20">
+                                <label>Email *</label>
+                                <input 
+                                    class="mb-0 form-control" 
+                                    type="email" 
+                                    value="{{ currentCustomer.email }}"
+                                    readonly
+                                >
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Mật khẩu cũ</label>
+                                <input 
+                                    formControlName="oldPassword" 
+                                    class="mb-0 form-control" 
+                                    type="password" 
+                                    placeholder="Mật khẩu..."
+                                    [ngClass]="{'is-invalid': changePasswordForm.get('oldPassword').touched && changePasswordForm.get('oldPassword').invalid }"
+                                >
+                                <div *ngIf="changePasswordForm.get('oldPassword').touched && changePasswordForm.get('oldPassword').invalid" class="invalid-feedback">
+                                    <div *ngIf="changePasswordForm.get('oldPassword').errors.required"> Mật khẩu cũ bị bỏ trống</div>
+                                    <div *ngIf="changePasswordForm.get('oldPassword').errors.minlength"> Tối thiểu 8 kí tự </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Mật khẩu mới</label>
+                                <input 
+                                    formControlName="newPassword" 
+                                    class="mb-0 form-control" 
+                                    type="password" 
+                                    placeholder="Mật khẩu..."
+                                    [ngClass]="{'is-invalid': changePasswordForm.get('newPassword').touched && changePasswordForm.get('newPassword').invalid }"
+                                >
+                                <div *ngIf="changePasswordForm.get('newPassword').touched && changePasswordForm.get('newPassword').invalid" class="invalid-feedback">
+                                    <div *ngIf="changePasswordForm.get('newPassword').errors.required"> Mật khẩu mới bị bỏ trống</div>
+                                    <div *ngIf="changePasswordForm.get('newPassword').errors.minlength"> Tối thiểu 8 kí tự </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Xác nhận mật khẩu mới</label>
+                                <input 
+                                    formControlName="confirmation" 
+                                    class="mb-0 form-control" 
+                                    type="password" 
+                                    placeholder="Mật khẩu..."
+                                    [ngClass]="{'is-invalid': changePasswordForm.get('confirmation').touched && changePasswordForm.get('confirmation').invalid }"
+                                >
+                                <div *ngIf="changePasswordForm.get('confirmation').touched && changePasswordForm.get('confirmation').invalid" class="invalid-feedback">
+                                    <div *ngIf="changePasswordForm.get('confirmation').errors.required"> Xác nhận mật khẩu bị bỏ trống</div>
+                                    <div *ngIf="changePasswordForm.get('confirmation').errors.minlength"> Tối thiểu 8 kí tự </div>
+                                    <div *ngIf="changePasswordForm.get('confirmation').errors.mustMatch"> Mật khẩu mới và xác nhận phải giống nhau</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button (click)="changePasswordSubmit(changePasswordForm.value)" class="register-button mt-0">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                <form [formGroup]="changeInformationForm">
+                    <div class="login-form">
+                        <h4 class="login-title">Thay đổi thông tin cá nhân</h4>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-20">
+                                <label>Họ tên đầy đủ</label>
+                                <input 
+                                    formControlName="fullName" 
+                                    class="mb-0 form-control" 
+                                    type="text" 
+                                    placeholder="Họ và tên"
+                                >
+                            </div>
+                            <div class="col-md-6 col-12 mb-20">
+                                <label>Email</label>
+                                <input 
+                                    formControlName="email" 
+                                    class="mb-0 form-control" 
+                                    type="text" 
+                                    placeholder="Email"
+                                >
+                            </div>
+                            <div class="col-md-12 mb-20">
+                                <label>Địa chỉ liên hệ</label>
+                                <input 
+                                    formControlName="address" 
+                                    class="mb-0 form-control" 
+                                    type="text" 
+                                    placeholder="Địa chỉ liên hệ"
+                                >
+                            </div>
+                            <div class="col-md-6 mb-20">
+                                <label>Số điện thoại</label>
+                                <input 
+                                    formControlName="phoneNumber" 
+                                    class="mb-0 form-control" 
+                                    type="tel" 
+                                    placeholder="Số điện thoại"
+                                >
+                            </div>
+                            <div class="col-md-6 mb-20">
+                                <label>Giới tính</label>
+                                <select formControlName="gender" [value]="currentCustomer" class="form-select form-control">
+                                    <option value="true">Nam</option>
+                                    <option value="false">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-20">
+                                <label>Ngày sinh</label>
+                                <input 
+                                    class="form-control" 
+                                    formControlName="birthDay" 
+                                    class="mb-0" 
+                                    value="{{ currentCustomer.birthDay | date: 'yyyy-dd-MM' }}" 
+                                    type="date"
+                                >
+                            </div>
+                            <div class="col-12">
+                                <button [disabled]="!changeInformationForm.valid" (click)="changeInformationSubmit(changeInformationForm.value)" class="register-button mt-0">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

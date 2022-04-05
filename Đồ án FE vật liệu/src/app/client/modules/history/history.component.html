@@ -1,0 +1,314 @@
+<mat-tab-group mat-align-tabs="center" style="margin-bottom: 40px;">
+    <mat-tab label="Đơn đã đặt">
+        <mat-accordion *ngIf="orders">
+            <mat-expansion-panel style="margin-top: 40px" *ngFor="let o of orders"> 
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mã đơn hàng: {{ o.orderId }} | Ngày đặt: {{ o.orderDate | date:'dd-MM-yyyy' }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Địa chỉ giao: {{ o.address }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Tổng tiền: {{ o.amount | currency: 'VND': '': '1.0-1' }}đ
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="Shopping-cart-area pt-60 pb-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12" *ngIf="o.orderStatus && o.orderStatus[o.orderStatus.length - 1].statusId == 2">
+                                <div class="coupon-all" style="margin-bottom: 20px;">
+                                    <button (click)="deleteOrder(o.orderId)">Huỷ đơn</button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class="table-content table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="li-product-remove">Mã SP</th>
+                                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                                    <th class="li-product-price">Số lượng</th>
+                                                    <th class="li-product-quantity">Đơn gía</th>
+                                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="orders">
+                                                <tr *ngFor="let od of o.orderDetails">
+                                                    <td class="li-product-thumbnail">{{ od.productId }}</td>
+                                                    <td class="li-product-thumbnail"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ od.product.images }}" alt="Li's Product Image"></td>
+                                                    <td class="li-product-name">{{ od.product.productName }}</td>
+                                                    <td class="li-product-name">{{ od.quantity }}</td>
+                                                    <td class="li-product-price">{{ od.product.price | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                    <td class="li-product-price">{{ od.product.price * od.quantity | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="cart-page-total">
+                                                <h2>Tổng tiền</h2>
+                                                <ul>
+                                                    <li>Tổng <span>{{ o.amount | currency: 'VND': '': '1.0-1' }}đ</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+
+    <mat-tab label="Đơn bị huỷ">
+        <mat-accordion *ngIf="statusCancle">
+            <mat-expansion-panel style="margin-top: 40px" *ngFor="let status of statusCancle"> 
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mã đơn hàng: {{ status.orderId }} | Ngày đặt: {{ status.orderDate | date:'dd-MM-yyyy' }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Địa chỉ giao: {{ status.address }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Tổng tiền: {{ status.amount | currency: 'VND': '': '1.0-1' }}đ
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="Shopping-cart-area pt-60 pb-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class="table-content table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="li-product-remove">Mã SP</th>
+                                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                                    <th class="li-product-price">Số lượng</th>
+                                                    <th class="li-product-quantity">Đơn gía</th>
+                                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="orders">
+                                                <tr *ngFor="let od of status.orderDetails">
+                                                    <td class="li-product-thumbnail">{{ od.productId }}</td>
+                                                    <td class="li-product-thumbnail"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ od.product.images }}" alt="Li's Product Image"></td>
+                                                    <td class="li-product-name">{{ od.product.productName }}</td>
+                                                    <td class="li-product-name">{{ od.quantity }}</td>
+                                                    <td class="li-product-price">{{ od.product.price | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                    <td class="li-product-price">{{ od.product.price * od.quantity | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="cart-page-total">
+                                                <h2>Tổng tiền</h2>
+                                                <ul>
+                                                    <li>Tổng <span>{{ status.amount | currency: 'VND': '': '1.0-1' }}đ</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+    <mat-tab label="Đơn hàng chưa xác nhận"> 
+        <mat-accordion *ngIf="statusNotConfirm">
+            <mat-expansion-panel style="margin-top: 40px" *ngFor="let status of statusNotConfirm">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mã đơn hàng: {{ status.orderId }} | Ngày đặt: {{ status.orderDate | date:'dd-MM-yyyy' }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Địa chỉ giao: {{ status.address }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Tổng tiền: {{ status.amount | currency: 'VND': '': '1.0-1' }}đ
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="Shopping-cart-area pt-60 pb-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class="table-content table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="li-product-remove">Mã SP</th>
+                                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                                    <th class="li-product-price">Số lượng</th>
+                                                    <th class="li-product-quantity">Đơn gía</th>
+                                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="orders">
+                                                <tr *ngFor="let od of status.orderDetails">
+                                                    <td class="li-product-thumbnail">{{ od.productId }}</td>
+                                                    <td class="li-product-thumbnail"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ od.product.images }}" alt="Li's Product Image"></td>
+                                                    <td class="li-product-name">{{ od.product.productName }}</td>
+                                                    <td class="li-product-name">{{ od.quantity }}</td>
+                                                    <td class="li-product-price">{{ od.product.price | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                    <td class="li-product-price">{{ od.product.price * od.quantity | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="cart-page-total">
+                                                <h2>Tổng tiền</h2>
+                                                <ul>
+                                                    <li>Tổng <span>{{ status.amount | currency: 'VND': '': '1.0-1' }}đ</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+    <mat-tab label="Đơn hàng đã xác nhận"> 
+        <mat-accordion *ngIf="statusHasConfirmed">
+            <mat-expansion-panel style="margin-top: 40px" *ngFor="let status of statusHasConfirmed">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mã đơn hàng: {{ status.orderId }} | Ngày đặt: {{ status.orderDate | date:'dd-MM-yyyy' }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Địa chỉ giao: {{ status.address }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Tổng tiền: {{ status.amount | currency: 'VND': '': '1.0-1' }}đ
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="Shopping-cart-area pt-60 pb-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class="table-content table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="li-product-remove">Mã SP</th>
+                                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                                    <th class="li-product-price">Số lượng</th>
+                                                    <th class="li-product-quantity">Đơn gía</th>
+                                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="orders">
+                                                <tr *ngFor="let od of status.orderDetails">
+                                                    <td class="li-product-thumbnail">{{ od.productId }}</td>
+                                                    <td class="li-product-thumbnail"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ od.product.images }}" alt="Li's Product Image"></td>
+                                                    <td class="li-product-name">{{ od.product.productName }}</td>
+                                                    <td class="li-product-name">{{ od.quantity }}</td>
+                                                    <td class="li-product-price">{{ od.product.price | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                    <td class="li-product-price">{{ od.product.price * od.quantity | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="cart-page-total">
+                                                <h2>Tổng tiền</h2>
+                                                <ul>
+                                                    <li>Tổng <span>{{ status.amount | currency: 'VND': '': '1.0-1' }}đ</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>     
+    </mat-tab>
+    <mat-tab label="Đơn hàng đã giao"> 
+        <mat-accordion *ngIf="statusHasDelivered">
+            <mat-expansion-panel style="margin-top: 40px" *ngFor="let status of statusHasDelivered">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mã đơn hàng: {{ status.orderId }} |  Ngày đặt: {{ status.orderDate }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Địa chỉ giao: {{ status.address }}
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Tổng tiền: {{ status.amount | currency: 'VND': '': '1.0-1'  }}đ
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="Shopping-cart-area pt-60 pb-60">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class="table-content table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="li-product-remove">Mã SP</th>
+                                                    <th class="li-product-thumbnail">Hình ảnh</th>
+                                                    <th class="cart-product-name">Tên sản phẩm</th>
+                                                    <th class="li-product-price">Số lượng</th>
+                                                    <th class="li-product-quantity">Đơn gía</th>
+                                                    <th class="li-product-subtotal">Tổng cộng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="orders">
+                                                <tr *ngFor="let od of status.orderDetails">
+                                                    <td class="li-product-thumbnail">{{ od.productId }}</td>
+                                                    <td class="li-product-thumbnail"><img height="200" width="200" src="https://drive.google.com/uc?export=view&id={{ od.product.images }}" alt="Li's Product Image"></td>
+                                                    <td class="li-product-name">{{ od.product.productName }}</td>
+                                                    <td class="li-product-name">{{ od.quantity }}</td>
+                                                    <td class="li-product-price">{{ od.product.price | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                    <td class="li-product-price">{{ od.product.price * od.quantity | currency: 'VND': '': '1.0-1' }}đ</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="cart-page-total">
+                                                <h2>Tổng tiền</h2>
+                                                <ul>
+                                                    <li>Tổng <span>{{ status.amount | currency: 'VND': '': '1.0-1' }}đ</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+  </mat-tab-group>
+

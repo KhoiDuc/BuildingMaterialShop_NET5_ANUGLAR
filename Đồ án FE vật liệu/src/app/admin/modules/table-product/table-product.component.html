@@ -1,0 +1,353 @@
+<!-- ADD PRODUCT -->
+<div class="modal animated fadeInDown" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm Sản Phẩm</h4>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="overflow-y: auto; max-height: 450px;">
+                <div class="form-element-area">
+                    <div class="container">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <div>
+                                    <h3>Vui lòng nhập hình ảnh</h3>
+                                </div>
+                                <form [formGroup]="addProductForm">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="form-group ic-cmp-int">
+                                                <div>
+                                                    <img height="237" width="237" src="{{ imgSrc }}" />
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input formControlName="images" type="file" class="form-control" placeholder="Tên hình" accept="image/x-png,image/jpg,image/jpeg,image/svg" (change)="onFileSelected($event)" [ngClass]="{'is-invalid': addProductForm.get('images').touched && addProductForm.get('images').invalid }">
+
+                                                    <div *ngIf="addProductForm.get('images').touched && addProductForm.get('images').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addProductForm.get('images').errors.required"> Chưa chọn hình ảnh </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <input formControlName="productId" type="text" class="form-control" placeholder="Mã sản phẩm" [ngClass]="{'is-invalid': addProductForm.get('productId').touched && addProductForm.get('productId').invalid }">
+                                                            <div *ngIf="addProductForm.get('productId').touched && addProductForm.get('productId').invalid" class="invalid-feedback">
+                                                                <div *ngIf="addProductForm.get('productId').errors.required"> Mã sản phẩm bị bỏ trống </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <input formControlName="productName" type="text" class="form-control" placeholder="Tên sản phẩm" [ngClass]="{'is-invalid': addProductForm.get('productName').touched && addProductForm.get('productName').invalid }">
+                                                            <div *ngIf="addProductForm.get('productName').touched && addProductForm.get('productName').invalid" class="invalid-feedback">
+                                                                <div *ngIf="addProductForm.get('productName').errors.required"> Tên sản phẩm chưa có </div>
+                                                                <div *ngIf="addProductForm.get('productName').errors.minlength"> Tên sản phẩm ít nhất 10 kí tự </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <input formControlName="price" type="text" (keypress)="numberOnly($event)" class="form-control" placeholder="Đơn giá" [ngClass]="{'is-invalid': addProductForm.get('price').touched && addProductForm.get('price').invalid }">
+                                                            <div *ngIf="addProductForm.get('price').touched && addProductForm.get('price').invalid" class="invalid-feedback">
+                                                                <div *ngIf="addProductForm.get('price').errors.required"> Đơn giá bị bỏ trống </div>
+                                                                <div *ngIf="addProductForm.get('price').errors.minlength"> Đơn giá ít nhất phải 5 chữ số </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <input formControlName="unit" type="text" class="form-control" placeholder="Đơn vị tính" [ngClass]="{'is-invalid': addProductForm.get('unit').touched && addProductForm.get('unit').invalid }">
+                                                            <div *ngIf="addProductForm.get('unit').touched && addProductForm.get('unit').invalid" class="invalid-feedback">
+                                                                <div *ngIf="addProductForm.get('unit').errors.required"> Đơn vị tính bị bỏ trống </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <select NgHr="categoryId" class="form-select form-control" formControlName="categoryId" id="categoryId" [value]="">
+                                                                <option value="" disabled>Loại sản phẩm</option>
+                                                                <option
+                                                                    *ngFor="let category of categories" value="{{category.categoryId}}"
+                                                                >
+                                                                    {{ category.categoryName }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <textarea formControlName="descriptions" class="form-control" cols="40" rows="3" style="white-space: normal;" placeholder="Thông tin sản phẩm" [ngClass]="{'is-invalid': addProductForm.get('descriptions').touched && addProductForm.get('descriptions').invalid }">
+                                                            </textarea>
+                                                            <div *ngIf="addProductForm.get('descriptions').touched && addProductForm.get('descriptions').invalid" class="invalid-feedback">
+                                                                <div *ngIf="addProductForm.get('descriptions').errors.required"> thông tin sản phẩm bị bỏ trống </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-10 col-sm-10 col-xs-12">
+                                                    <div class="form-group ic-cmp-int">
+                                                        <div class="form-ic-cmp">
+
+                                                        </div>
+                                                        <div class="nk-int-st">
+                                                            <select NgHr="supplies" class="form-select form-control" formControlName="supplies" multiple="true">
+                                                                <option
+                                                                    *ngFor="let supplier of suppliers" value="{{supplier.supplierId}}"
+
+                                                                >
+                                                                    {{ supplier.supplierName }}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="addProductForm.invalid" type="button" class="btn btn-default" (click)="submit(addProductForm.value)">Thêm</button>
+                <button type="button" class="btn btn-default" (click)="closeModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ADD PRODUCT -->
+
+<!-- ADJUST PRODUCT -->
+<div class="modal animated fadeInDown" tabindex="-1" role="dialog" *ngIf="currentProduct" [ngStyle]="{'display':display2}">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa sản phẩm mã {{ currentProduct.productId }}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal2()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-element-area">
+                    <div>
+                        <h3></h3>
+                    </div>
+                    <div class="container">
+                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <form [formGroup]="adjustProductForm">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input formControlName="productName" type="text" class="form-control" placeholder="Tên sản phẩm" [ngClass]="{'is-invalid': adjustProductForm.get('productName').touched && adjustProductForm.get('productName').invalid }">
+                                                    <div *ngIf="adjustProductForm.get('productName').touched && adjustProductForm.get('productName').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustProductForm.get('productName').errors.required"> Tên sản phẩm chưa có </div>
+                                                        <div *ngIf="adjustProductForm.get('productName').errors.minlength"> Tên sản phẩm ít nhất 10 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input formControlName="price" type="text" (keypress)="numberOnly($event)" class="form-control" placeholder="Đơn giá" [ngClass]="{'is-invalid': adjustProductForm.get('price').touched && adjustProductForm.get('price').invalid }">
+                                                    <div *ngIf="adjustProductForm.get('price').touched && adjustProductForm.get('price').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustProductForm.get('price').errors.required"> Đơn giá bị bỏ trống </div>
+                                                        <div *ngIf="adjustProductForm.get('price').errors.minlength"> Đơn giá ít nhất phải 5 chữ số </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input formControlName="unit" type="text" class="form-control" placeholder="Đơn vị tính" [ngClass]="{'is-invalid': adjustProductForm.get('unit').touched && adjustProductForm.get('unit').invalid }">
+                                                    <div *ngIf="adjustProductForm.get('unit').touched && adjustProductForm.get('unit').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustProductForm.get('unit').errors.required"> Đơn vị tính bị bỏ trống </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <select NgHr="categoryId" class="form-select form-control" formControlName="categoryId" id="categoryId" [value]="currentProduct.supplies">
+                                                        <option value="" disabled>Loại sản phẩm</option>
+                                                        <option
+                                                            *ngFor="let category of categories" [ngValue]="category.categoryId"
+                                                        >
+                                                            {{ category.categoryName }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <textarea formControlName="descriptions" class="form-control" cols="40" rows="3" style="white-space: normal;" placeholder="Thông tin sản phẩm" [ngClass]="{'is-invalid': adjustProductForm.get('descriptions').touched && adjustProductForm.get('descriptions').invalid }">
+                                                    </textarea>
+                                                    <div *ngIf="adjustProductForm.get('descriptions').touched && adjustProductForm.get('descriptions').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustProductForm.get('descriptions').errors.required"> thông tin sản phẩm bị bỏ trống </div>
+                                                        <div *ngIf="adjustProductForm.get('descriptions').errors.minlenth"> thông tin sản phẩm ít nhất 10 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal2()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ADJUST PRODUCT -->
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="notika-icon notika-windows"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Dữ liệu bảng</h2>
+                                    <p>Quản lý <span class="bread-ntd">Sản phẩm</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcomb-report">
+                                <button (click)="openModal()" style="margin-right:20px" data-toggle="tooltip" data-placement="left" title="Thêm Sản Phẩm" class="btn">Thêm sản phẩm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcomb area End-->
+<div class="normal-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="normal-table-list mg-t-30">
+                    <!-- <div class="basic-tb-hd">
+
+                    </div> -->
+                    <div style="overflow-x: auto;" class="bsc-tbl-hvr">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã sản phẩm</th>
+                                    <th style="white-space: nowrap;">Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Nội dung</th>
+                                    <th>Giá</th>
+                                    <th>Đơn vị tính</th>
+                                    <th>Số lượng tồn kho</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="productData">
+                                <tr *ngFor="let product of productData | paginate: { id: 'listing_pagination', itemsPerPage: itemsPerPage, currentPage: page , totalItems: totalRecords }">
+                                    <td>{{ product.productId }}</td>
+                                    <td><img height="250" width="250" src="https://drive.google.com/uc?export=view&id={{ product.images }}" /></td>
+                                    <td style="white-space: nowrap;">{{ product.productName }}</td>
+                                    <td>{{ product.descriptions }}</td>
+                                    <td>{{ product.price }}</td>
+                                    <td>{{ product.unit }}</td>
+                                    <td>{{ product.wareHouses[product.wareHouses.length - 1].quantity }}</td>
+                                    <td>{{ product.status == true ? 'Còn bán' : 'Hết bán' }}</td>
+                                    <td>
+                                        <button (click)="openModal2(product)" type="button" class="btn btn-primary">Xem thông tin</button>
+                                    </td>
+                                    <td>
+                                        <button (click)="productBlockTrigger(product)" type="button" class="btn btn-danger">{{ product.status == true ? 'KHOÁ SẢN PHẨM' : 'MỞ SẢN PHẨM' }}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls (pageChange)="page = $event" id="listing_pagination" maxSize="10" directionLinks="true" style="float:right; margin-top: 20px; margin-bottom: 20px;">
+                    </pagination-controls>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,510 @@
+<div class="modal animated fadeInDown" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm nhân viên</h4>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-element-area">
+                    <div class="container">
+                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list">
+                                <form [formGroup]="addEmployeeForm">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-support"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input
+                                                        formControlName="firstname"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        placeholder="Họ và tên lót"
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('firstname').touched && addEmployeeForm.get('firstname').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('firstname').touched && addEmployeeForm.get('firstname').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('firstname').errors.required"> Họ và tên lót bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('firstname').errors.minlength"> Tối thiểu 7 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-support"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="lastname" 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        placeholder="Tên"
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('lastname').touched && addEmployeeForm.get('lastname').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('lastname').touched && addEmployeeForm.get('lastname').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('lastname').errors.required"> Tên bị bỏ trống </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    Nam
+                                                </div>
+                                                <div class="fm-checkbox form-elet-mg">
+                                                    <label>
+                                                        <input 
+                                                            formControlName="gender" 
+                                                            type="radio" 
+                                                            class="i-checks"
+                                                            value="true"
+                                                            [checked]="male == true"
+                                                        > <i></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-ic-cmp">
+                                                    Nữ
+                                                </div>
+                                                <div class="fm-checkbox form-elet-mg">
+                                                    <label>
+                                                        <input 
+                                                            formControlName="gender" 
+                                                            type="radio" 
+                                                            class="i-checks"
+                                                            value="false"
+                                                            [checked]="female == true"
+                                                        > <i></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-calendar"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="birthDay"
+                                                        type="date" 
+                                                        class="form-control"
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('birthDay').touched && addEmployeeForm.get('birthDay').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('birthDay').touched && addEmployeeForm.get('birthDay').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('birthDay').errors.required"> Ngày sinh bị bỏ trống </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-email"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="email"
+                                                        type="email" 
+                                                        class="form-control" 
+                                                        placeholder="Email..."
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('email').touched && addEmployeeForm.get('email').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('email').touched && addEmployeeForm.get('email').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('email').errors.required"> Email bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('email').errors.pattern"> Email không hợp lệ </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-phone"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input
+                                                        formControlName="phoneNumber" 
+                                                        type="tel" 
+                                                        class="form-control" 
+                                                        placeholder="Số điện thoại..."
+                                                        
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('phoneNumber').touched && addEmployeeForm.get('phoneNumber').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('phoneNumber').touched && addEmployeeForm.get('phoneNumber').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('phoneNumber').errors.required"> Số điện thoại bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('phoneNumber').errors.pattern"> Số diện thoại không hợp lệ </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-map"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="address"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        placeholder="Địa chỉ liên hệ"
+                                                    
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('address').touched && addEmployeeForm.get('address').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('address').touched && addEmployeeForm.get('address').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('address').errors.required"> Địa chỉ liên hệ bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('address').errors.minlength"> Tối thiểu 12 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-lock"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="password"
+                                                        type="password" 
+                                                        class="form-control" 
+                                                        placeholder="Mật khẩu..."
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('password').touched && addEmployeeForm.get('password').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('password').touched && addEmployeeForm.get('password').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('password').errors.required"> Mật khảu bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('password').errors.minlength"> Tối thiểu 8 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-lock"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="confirmation"
+                                                        type="password" 
+                                                        class="form-control" 
+                                                        placeholder="Xác nhận mật khẩu..."
+                                                        [ngClass]="{'is-invalid': addEmployeeForm.get('confirmation').touched && addEmployeeForm.get('confirmation').invalid }"
+                                                    >
+                                                    <div *ngIf="addEmployeeForm.get('confirmation').touched && addEmployeeForm.get('confirmation').invalid" class="invalid-feedback">
+                                                        <div *ngIf="addEmployeeForm.get('confirmation').errors.required"> Xác nhận mật khẩu bị bỏ trống </div>
+                                                        <div *ngIf="addEmployeeForm.get('confirmation').errors.minlength"> Tối thiểu 8 kí tự </div>
+                                                        <div *ngIf="addEmployeeForm.get('confirmation').errors.mustMatch"> Hai mật khẩu phải giống nhau </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-draft"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <select 
+                                                        NgModel="hr" 
+                                                        class="form-select form-control" 
+                                                        formControlName="roles" 
+                                                        id="roles"
+                                                    >
+                                                        <option value="{{ role.roleId }}" *ngFor="let role of roles">{{ role.roleName }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="addEmployeeForm.invalid" type="button" class="btn btn-default" (click)="addEmployee(addEmployeeForm.value)">Thêm</button>
+                <button type="button" class="btn btn-default" (click)="closeModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal animated fadeInDown" tabindex="-1" role="dialog" [ngStyle]="{'display': display2}" >
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" *ngIf="employee">Chỉnh sửa thông tin nhân viên: {{ employee.fullName }}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="closeModal2()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-element-area">
+                    <div class="container">
+                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-element-list" *ngIf="employee">
+                                <form [formGroup]="adjustEmployeeForm">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-support"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input
+                                                        formControlName="fullname"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        placeholder="Họ và tên"
+                                                        [ngClass]="{'is-invalid': adjustEmployeeForm.get('fullname').touched && adjustEmployeeForm.get('fullname').invalid }"
+                                                    >
+                                                    <div *ngIf="adjustEmployeeForm.get('fullname').touched && adjustEmployeeForm.get('fullname').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustEmployeeForm.get('fullname').errors.required"> Họ và tên bị bỏ trống </div>
+                                                        <div *ngIf="adjustEmployeeForm.get('fullname').errors.minlength"> Tối thiểu 12 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    Nam
+                                                </div>
+                                                <div class="fm-checkbox form-elet-mg">
+                                                    <label>
+                                                        <input 
+                                                            #true
+                                                            type="radio" 
+                                                            class="i-checks"
+                                                            [value]="true"
+                                                            formControlName="gender"
+                                                            name="gender" 
+                                                        > <i></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-ic-cmp">
+                                                    Nữ
+                                                </div>
+                                                <div class="fm-checkbox form-elet-mg">
+                                                    <label>
+                                                        <input 
+                                                            #false
+                                                            type="radio" 
+                                                            class="i-checks"
+                                                            [value]="false"
+                                                            formControlName="gender"
+                                                            name="gender"
+                                                        > <i></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-calendar"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="birthDay"
+                                                        type="date" 
+                                                        class="form-control"
+                                                        [ngClass]="{'is-invalid': adjustEmployeeForm.get('birthDay').touched && adjustEmployeeForm.get('birthDay').invalid }"
+                                                    >
+                                                    <div *ngIf="adjustEmployeeForm.get('birthDay').touched && adjustEmployeeForm.get('birthDay').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustEmployeeForm.get('birthDay').errors.required"> Ngày sinh bị bỏ trống </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-email"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="email"
+                                                        type="email" 
+                                                        class="form-control" 
+                                                        placeholder="Email..."
+                                                        [ngClass]="{'is-invalid': adjustEmployeeForm.get('email').touched && adjustEmployeeForm.get('email').invalid }"
+                                                    >
+                                                    <div *ngIf="adjustEmployeeForm.get('email').touched && adjustEmployeeForm.get('email').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustEmployeeForm.get('email').errors.required"> Email bị bỏ trống </div>
+                                                        <div *ngIf="adjustEmployeeForm.get('email').errors.pattern"> Email không hợp lệ </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-phone"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input
+                                                        formControlName="phoneNumber" 
+                                                        type="tel" 
+                                                        class="form-control" 
+                                                        placeholder="Số điện thoại..."
+                                                        [ngClass]="{'is-invalid': adjustEmployeeForm.get('phoneNumber').touched && adjustEmployeeForm.get('phoneNumber').invalid }"
+                                                    >
+                                                    <div *ngIf="adjustEmployeeForm.get('phoneNumber').touched && adjustEmployeeForm.get('phoneNumber').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustEmployeeForm.get('phoneNumber').errors.required"> Số điện thoại bị bỏ trống </div>
+                                                        <div *ngIf="adjustEmployeeForm.get('phoneNumber').errors.pattern"> Số diện thoại không hợp lệ </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-map"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <input 
+                                                        formControlName="address"
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        placeholder="Địa chỉ liên hệ"
+                                                        [ngClass]="{'is-invalid': adjustEmployeeForm.get('address').touched && adjustEmployeeForm.get('address').invalid }"
+                                                    >
+                                                    <div *ngIf="adjustEmployeeForm.get('address').touched && adjustEmployeeForm.get('address').invalid" class="invalid-feedback">
+                                                        <div *ngIf="adjustEmployeeForm.get('address').errors.required"> Địa chỉ liên hệ bị bỏ trống </div>
+                                                        <div *ngIf="adjustEmployeeForm.get('address').errors.minlength"> Tối thiểu 12 kí tự </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group ic-cmp-int">
+                                                <div class="form-ic-cmp">
+                                                    <i class="notika-icon notika-draft"></i>
+                                                </div>
+                                                <div class="nk-int-st">
+                                                    <select NgModel="hr" class="form-select" formControlName="roleId" id="roleId">
+                                                        <option [ngValue]="role.roleId" *ngFor="let role of roles">{{ role.roleName }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="adjustEmployeeForm.invalid" type="button" class="btn btn-default" (click)="submitAdjust(adjustEmployeeForm.value)">Lưu</button>
+                <button type="button" class="btn btn-default" (click)="closeModal2()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="notika-icon notika-windows"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Dữ liệu bảng</h2>
+                                    <p>Quản lý <span class="bread-ntd">nhân viên</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcomb-report">
+                                <button (click)="openModal()" style="margin-right:20px" data-toggle="tooltip" data-placement="left" title="Thêm nhân viên" class="btn">Thêm nhân viên</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcomb area End-->
+<div class="normal-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="normal-table-list mg-t-30">
+                    <!-- <div class="basic-tb-hd">
+                        
+                    </div> -->
+                    <div style="overflow-x: auto;" class="bsc-tbl-hvr">
+                        <table class="table scrollable table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã nhân viên</th>
+                                    <th>Họ và tên đầy đủ</th>
+                                    <th>Email</th>
+                                    <th>Địa chỉ liên hệ</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Giới tính</th>
+                                    <th style="white-space: nowrap;">Ngày sinh</th>
+                                    <th>Chức vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="employeeData">
+                                <tr *ngFor="let employee of employeeData | paginate: { id: 'listing_pagination', itemsPerPage: itemsPerPage, currentPage: page , totalItems: totalRecords }">
+                                    <td>{{ employee.employeeId }}</td>
+                                    <td>{{ employee.fullName }}</td>
+                                    <td>{{ employee.email }}</td>
+                                    <td>{{ employee.address }}</td>
+                                    <td>{{ employee.phoneNumber }}</td>
+                                    <td>{{ employee.gender == true ? "Nam" : "Nữ" }}</td>
+                                    <td style="white-space: nowrap;">{{ employee.birthDay | date:'dd-MM-yyyy' }}</td>
+                                    <td>{{ employee.roleId }}</td>
+                                    <td>
+                                        <button (click)="openModal2(employee)" type="button" class="btn btn-primary">Sửa thông tin</button>
+                                    </td>
+                                    <td>
+                                        <button (click)="employeeBlockTrigger(employee)" type="button" class="btn btn-danger">{{ employee.isBlocked == false ? 'KHOÁ TÀI KHOẢN' : 'MỞ TÀI KHOẢN' }}</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls 
+                        (pageChange)="page = $event" 
+                        id="listing_pagination"
+                        maxSize="5"
+                        directionLinks="true"
+                        style="float:right; margin-top: 20px; margin-bottom: 20px;"
+                    >
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+

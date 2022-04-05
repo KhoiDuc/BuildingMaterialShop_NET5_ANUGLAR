@@ -1,0 +1,195 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "718d696f-2ea7-4d72-b6d2-9e316242fe4b"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "Project": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/Project",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.scss",
+              {
+                "input": "src/client-style.css",
+                "bundleName": "client-style",
+                "inject": false
+              },
+              {
+                "input": "src/client-responsive.css",
+                "bundleName": "client-responsive",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/admin-style.css",
+                "bundleName": "admin-style",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/admin-main.css",
+                "bundleName": "admin-main",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/notika-custom-icon.css",
+                "bundleName": "admin-notika-icon",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/responsive.css",
+                "bundleName": "admin-responsive",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/normalize.css",
+                "bundleName": "admin-normalize",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/waves.min.css",
+                "bundleName": "admin-waves",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/button.css",
+                "bundleName": "admin-wave-button",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/jquery-jvectormap-2.0.3.css",
+                "bundleName": "admin-jvectormap",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/bootstrap.min.css",
+                "bundleName": "admin-jvectormap",
+                "inject": false
+              },
+              {
+                "input": "src/assets/admin/css/meanmenu.css",
+                "bundleName": "admin-jvectormap",
+                "inject": false
+              }
+
+            ],
+            "scripts": [ "src/main.ts" ]
+            
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Project:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Project:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "Project:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "Project:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Project:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "Project"
+}
